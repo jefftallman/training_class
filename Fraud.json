@@ -1,0 +1,719 @@
+{
+	"graph": {
+		"style": {
+			"radius": 50,
+			"node-color": "#47a8dc",
+			"border-width": 0,
+			"border-color": "#000000",
+			"caption-position": "inside",
+			"caption-color": "#ffffff",
+			"caption-font-size": 10,
+			"caption-font-weight": "normal",
+			"label-color": "#000000",
+			"label-background-color": "#ffffff",
+			"label-border-color": "#000000",
+			"label-border-width": 1,
+			"label-font-size": 10,
+			"label-padding": 5,
+			"label-margin": 4,
+			"property-color": "#000000",
+			"property-font-size": 8,
+			"property-font-weight": "normal",
+			"arrow-width": 1,
+			"arrow-color": "#000000",
+			"type-orientation": "inline",
+			"type-font-size": 10,
+			"type-color": "#000000",
+			"type-background-color": "#ffffff",
+			"type-border-width": 1,
+			"type-border-color": "#000000",
+			"type-padding": 2
+		},
+		"nodes": [
+			{
+				"id": "n0",
+				"position": {
+					"x": 881.665537188208,
+					"y": 277.0271564308977
+				},
+				"caption": "Person",
+				"style": {
+				},
+				"labels": [
+				],
+				"properties": {
+					"creditScore": "",
+					"lastName": "",
+					"firstName": ""
+				}
+			},
+			{
+				"id": "n1",
+				"position": {
+					"x": 1730.2933706245371,
+					"y": 216.71949208055656
+				},
+				"caption": "FinancialInstitution",
+				"style": {
+				},
+				"labels": [
+				],
+				"properties": {
+					"BankName": "",
+					"RoutingNumber": "",
+					"FraudScore": ""
+				}
+			},
+			{
+				"id": "n2",
+				"position": {
+					"x": 1234.6056891520277,
+					"y": 609.0559306009775
+				},
+				"caption": "Account",
+				"style": {
+				},
+				"labels": [
+				],
+				"properties": {
+					"CreditLimit": "",
+					"Balance": "",
+					"IsInArrears": ""
+				}
+			},
+			{
+				"id": "n3",
+				"position": {
+					"x": 935.4130838814617,
+					"y": 43.351370720297666
+				},
+				"caption": "TaxNumber",
+				"style": {
+				},
+				"labels": [
+				],
+				"properties": {
+				}
+			},
+			{
+				"id": "n4",
+				"position": {
+					"x": 667.2366821284392,
+					"y": 60.6826615530655
+				},
+				"caption": "StreetAddress",
+				"style": {
+					"node-color": "#c45100"
+				},
+				"labels": [
+				],
+				"properties": {
+				}
+			},
+			{
+				"id": "n5",
+				"position": {
+					"x": 853.8449941605483,
+					"y": -153.7510749964293
+				},
+				"caption": "PostalCode",
+				"style": {
+					"node-color": "#e27300"
+				},
+				"labels": [
+				],
+				"properties": {
+					"PostalCode": "",
+					"City": "",
+					"State": ""
+				}
+			},
+			{
+				"id": "n6",
+				"position": {
+					"x": 935.4130838814617,
+					"y": -352.4815920643931
+				},
+				"caption": "City",
+				"style": {
+					"node-color": "#e27300"
+				},
+				"labels": [
+				],
+				"properties": {
+					"CityName": "",
+					"State": ""
+				}
+			},
+			{
+				"id": "n7",
+				"position": {
+					"x": 1173.3250799229697,
+					"y": -372.99757893089975
+				},
+				"caption": "State",
+				"style": {
+					"node-color": "#e27300"
+				},
+				"labels": [
+				],
+				"properties": {
+				}
+			},
+			{
+				"id": "n8",
+				"position": {
+					"x": 829.7985937308837,
+					"y": 556.5165295141079
+				},
+				"caption": "Phone",
+				"style": {
+				},
+				"labels": [
+				],
+				"properties": {
+				}
+			},
+			{
+				"id": "n9",
+				"position": {
+					"x": 523.3174827888954,
+					"y": 406.79691327608936
+				},
+				"caption": "Occupation",
+				"style": {
+				},
+				"labels": [
+				],
+				"properties": {
+					"HighSalary": "",
+					"AvgSalary": "",
+					"LowSalary": ""
+				}
+			},
+			{
+				"id": "n10",
+				"position": {
+					"x": 1186.3722062449574,
+					"y": 328.9166427159961
+				},
+				"caption": "CreditApplication",
+				"style": {
+				},
+				"labels": [
+				],
+				"properties": {
+					"Salary": ""
+				}
+			},
+			{
+				"id": "n11",
+				"position": {
+					"x": 1325.5740558963707,
+					"y": -95.14553401996311
+				},
+				"caption": "CalendarDate",
+				"style": {
+					"node-color": "#808900"
+				},
+				"labels": [
+				],
+				"properties": {
+				}
+			},
+			{
+				"id": "n12",
+				"position": {
+					"x": 1466.9230793066413,
+					"y": -236.03665691105027
+				},
+				"caption": "CalendarMonth",
+				"style": {
+					"node-color": "#808900"
+				},
+				"labels": [
+				],
+				"properties": {
+				}
+			},
+			{
+				"id": "n13",
+				"position": {
+					"x": 1638.0919874986346,
+					"y": -352.4815920643931
+				},
+				"caption": "CalendaryYear",
+				"style": {
+					"node-color": "#808900"
+				},
+				"labels": [
+				],
+				"properties": {
+				}
+			},
+			{
+				"id": "n14",
+				"position": {
+					"x": 1609.8353608431594,
+					"y": -95.14553401996311
+				},
+				"caption": "CalendarDate",
+				"style": {
+					"node-color": "#dbdf00"
+				},
+				"labels": [
+				],
+				"properties": {
+				}
+			},
+			{
+				"id": "n15",
+				"position": {
+					"x": 578.5126738086952,
+					"y": 216.71949208055656
+				},
+				"caption": "Email",
+				"style": {
+				},
+				"labels": [
+				],
+				"properties": {
+				}
+			},
+			{
+				"id": "n16",
+				"position": {
+					"x": 1685.943897880819,
+					"y": 516.6620529798346
+				},
+				"caption": "LatePayments",
+				"style": {
+				},
+				"labels": [
+				],
+				"properties": {
+					"daysLate": ""
+				}
+			},
+			{
+				"id": "n17",
+				"position": {
+					"x": 1582.0841087218682,
+					"y": 43.351370720297666
+				},
+				"caption": "Inquiry",
+				"style": {
+				},
+				"labels": [
+				],
+				"properties": {
+				}
+			}
+		],
+		"relationships": [
+			{
+				"id": "n0",
+				"type": "IS_CUSTOMER",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n0",
+				"toId": "n1"
+			},
+			{
+				"id": "n1",
+				"type": "IS_EMPLOYEE",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n0",
+				"toId": "n1"
+			},
+			{
+				"id": "n2",
+				"type": "CREDITCARD_AT",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n2",
+				"toId": "n1"
+			},
+			{
+				"id": "n3",
+				"type": "HAS_CREDITCARD",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n0",
+				"toId": "n2"
+			},
+			{
+				"id": "n4",
+				"type": "IDENTIFIED_BY",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n0",
+				"toId": "n3"
+			},
+			{
+				"id": "n5",
+				"type": "RESIDES_AT",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n0",
+				"toId": "n4"
+			},
+			{
+				"id": "n6",
+				"type": "MAILING",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n0",
+				"toId": "n4"
+			},
+			{
+				"id": "n7",
+				"type": "HAS_ZIP",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n4",
+				"toId": "n5"
+			},
+			{
+				"id": "n8",
+				"type": "LOCATED_IN",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n5",
+				"toId": "n6"
+			},
+			{
+				"id": "n9",
+				"type": "LOCATED_IN",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n6",
+				"toId": "n7"
+			},
+			{
+				"id": "n10",
+				"type": "CELLPHONE",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n0",
+				"toId": "n8"
+			},
+			{
+				"id": "n11",
+				"type": "HOME_PHONE",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n0",
+				"toId": "n8"
+			},
+			{
+				"id": "n12",
+				"type": "WORK_PHONE",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n0",
+				"toId": "n8"
+			},
+			{
+				"id": "n13",
+				"type": "CURRENT",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n0",
+				"toId": "n9"
+			},
+			{
+				"id": "n14",
+				"type": "APPLIED_TO",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n10",
+				"toId": "n1"
+			},
+			{
+				"id": "n15",
+				"type": "APPLICANT",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n0",
+				"toId": "n10"
+			},
+			{
+				"id": "n16",
+				"type": "IS_DAY_IN",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n11",
+				"toId": "n12"
+			},
+			{
+				"id": "n17",
+				"type": "IS_MONTH_IN",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n12",
+				"toId": "n13"
+			},
+			{
+				"id": "n18",
+				"type": "NEXT_DATE",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n11",
+				"toId": "n14"
+			},
+			{
+				"id": "n19",
+				"type": "DOB",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n0",
+				"toId": "n11"
+			},
+			{
+				"id": "n20",
+				"type": "APPLIED_DATE",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n10",
+				"toId": "n11"
+			},
+			{
+				"id": "n21",
+				"type": "OPENED_DATE",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n2",
+				"toId": "n11"
+			},
+			{
+				"id": "n22",
+				"type": "IS_ON_BOARD",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n0",
+				"toId": "n1"
+			},
+			{
+				"id": "n23",
+				"type": "HAS_LINEOFCREDIT",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n0",
+				"toId": "n2"
+			},
+			{
+				"id": "n24",
+				"type": "LINEOFCREDIT_AT",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n2",
+				"toId": "n1"
+			},
+			{
+				"id": "n25",
+				"type": "BASED_ON",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n2",
+				"toId": "n10"
+			},
+			{
+				"id": "n26",
+				"type": "HOME_PHONE",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n10",
+				"toId": "n8"
+			},
+			{
+				"id": "n27",
+				"type": "HAD_ADDRESS",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n10",
+				"toId": "n4"
+			},
+			{
+				"id": "n28",
+				"type": "HAS_EMAIL",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n0",
+				"toId": "n15"
+			},
+			{
+				"id": "n29",
+				"type": "COSIGNER",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n0",
+				"toId": "n10"
+			},
+			{
+				"id": "n30",
+				"type": "WAS_LATE",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n2",
+				"toId": "n16"
+			},
+			{
+				"id": "n31",
+				"type": "WAS_LATE_ON",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n16",
+				"toId": "n11"
+			},
+			{
+				"id": "n33",
+				"type": "IS_SUBJECT_OF",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n0",
+				"toId": "n17"
+			},
+			{
+				"id": "n34",
+				"type": "APPEARS_ON",
+				"style": {
+				},
+				"properties": {
+					"reportedBalance": ""
+				},
+				"fromId": "n2",
+				"toId": "n17"
+			},
+			{
+				"id": "n35",
+				"type": "REQUESTS",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n1",
+				"toId": "n17"
+			},
+			{
+				"id": "n36",
+				"type": "INQUIRY_DATE",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n17",
+				"toId": "n11"
+			},
+			{
+				"id": "n37",
+				"type": "IS_REPORTED_ON",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n16",
+				"toId": "n17"
+			},
+			{
+				"id": "n38",
+				"type": "CONTRIBUTED_FRAUD",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n2",
+				"toId": "n1"
+			},
+			{
+				"id": "n39",
+				"type": "APPROVER",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n0",
+				"toId": "n10"
+			},
+			{
+				"id": "n40",
+				"type": "REVIEWER",
+				"style": {
+				},
+				"properties": {
+				},
+				"fromId": "n0",
+				"toId": "n10"
+			}
+		]
+	},
+	"gangs": [
+	]
+}
