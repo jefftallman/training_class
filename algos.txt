@@ -1,0 +1,139 @@
+###################################################### Load projected graph to memory ####################################################################
+
+call algo.graph.load('similarity','AccountHolder|SSN|Email|Address|PhoneNumber','HAS_SSN|HAS_EMAIL|HAS_ADDRESS|HAS_PHONENUMBER')
+
+###################################################### Calculate Similarity for two customers ############################################################
+
+:param customer1=>5004;
+:param customer2=>5002;
+
+MATCH(a1:AccountHolder)-[:HAS_SSN|:HAS_EMAIL|:HAS_ADDRESS|:HAS_PHONENUMBER]->(ids)
+WHERE a1.customerID=$customer1
+WITH a1,collect(id(ids)) AS ids1
+MATCH(a2:AccountHolder)-[:HAS_SSN|:HAS_EMAIL|:HAS_ADDRESS|:HAS_PHONENUMBER]->(ids)
+WHERE a2.customerID=$customer2
+WITH a1,ids1,a2,collect(id(ids)) AS ids2
+RETURN a1.customerID,a2.customerID,algo.similarity.jaccard(ids1,ids2) AS similarity
+
+
+###################################################### Stream Pairwise Similarity Calculations ############################################################
+
+call algo.nodeSimilarity.stream('AccountHolder',null,{graph:'similarity'}) YIELD node1,node2,similarity
+RETURN algo.asNode(node1).customerID As id1,algo.asNode(node2).customerID AS id2,similarity
+ORDER BY id1,similarity DESC
+
+###################################################### Store Pairwise Similarity Calculations #############################################################
+
+call algo.nodeSimilarity('AccountHolder',null,{graph:'similarity',write:true,writeRelationshipType:'SIMILAR',writeProperty:'score',direction:'OUTGOING'})
+
+###################################################### Load projected graph to memory ####################################################################
+
+call algo.graph.load('clustering','AccountHolder','SIMILAR')
+
+###################################################### Stream Louvain on the clustering graoh #############################################################
+
+call algo.louvain.stream(null,null,{graph:'clustering',direction:'OUTGOING',weightProperty:'score'})
+YIELD nodeId,community
+WITH collect(DISTINCT algo.asNode(nodeId).customerID) AS customers,community
+WITH size(customers) as communitySize,community,customers
+RETURN community,communitySize,customers
+ORDER by communitySize DESC
+
+###################################################### Stored the results of Louvain  #####################################################################
+
+call algo.louvain(null,null,{graph:'clustering',direction:'OUTGOING',weightProperty:'score',write:true,writeProperty:'louvain'})
+
+###################################################### Look at the cluster with Higher number of customers ################################################
+
+:param louvain=>5009
+
+MATCH (a:AccountHolder) WHERE a.louvain=$louvain RETURN a
+
+CALL algo.pageRank.stream(
+  'MATCH (a:AccountHolder) WHERE a.louvain=$louvain RETURN id(a) as id',
+  'MATCH (a1:AccountHolder)-[:SIMILAR]-(a2:AccountHolder) RETURN id(a1) as source, id(a2) as target',
+  {graph:'cypher',params:{louvain:$louvain}}
+) YIELD nodeId,score with algo.asNode(nodeId) as customer, score order by score desc
+RETURN customer.customerID,customer.fullName,customer.fraudScore,score
+
+###################################################### Run Page Rank per cluster and stored the results ######################################################
+
+CALL apoc.periodic.iterate(
+	"MATCH (a:AccountHolder) WITH a.louvain AS community,size(collect(a.customerID)) AS 	communitySize WHERE communitySize>1 RETURN community",
+	"CALL algo.pageRank.stream(
+  		'MATCH (a:AccountHolder) WHERE a.louvain=$louvain RETURN id(a) as id',
+  		'MATCH (a1:AccountHolder)-[:SIMILAR]-(a2:AccountHolder) RETURN id(a1) as source,id(a2) as target',{graph:'cypher',params:{louvain:community}}
+     ) YIELD nodeId,score
+     WITH algo.asNode(nodeId).customerID AS customer,score
+     MATCH (a:AccountHolder) WHERE a.customerID=customer
+     SET a.pagerank=score
+     "
+,{})
+
+###################################################### Money Transfers ######################################################
+#############################################################################################################################
+
+
+################################################## Load Inmemory Graph ######################################################
+call algo.graph.load('moneyTransfers','MATCH (a:AccountHolder) RETURN id(a) AS id',
+	'MATCH path=(ah1)-[:HAS_BANKACCOUNT]->(ba)-[:SEND]->(t:Transaction)-[:SEND]-(:BankAccount)<-[:HAS_BANKACCOUNT]-(ah2)
+WITH ah1,ah2,count(*) AS sendFreq,sum(t.amount) AS sendTotal
+Return id(ah1) AS source,id(ah2) AS target,toFloat(sendTotal)/sendFreq AS weight',
+{graph:'cypher'}
+)
+
+################################################## Stream WWC ######################################################
+call algo.wcc.stream(null,null,{graph:'moneyTransfers'}) YIELD nodeId,setId
+WITH algo.asNode(nodeId) AS customer,setId
+WITH setId,collect(customer.customerID) AS customerList
+WITH *,size(customerList) AS listSize
+RETURN setId,listSize,customerList
+ORDER BY listSize DESC
+
+################################################## Store WWC ######################################################
+call algo.wcc(null,null,{graph:'moneyTransfers',write:true,writeProperty:'wcc'})
+
+################################################## Reload the graph removing disconnected components ##############
+call algo.graph.remove('moneyTransfers');
+
+call algo.graph.load('moneyTransfers2','MATCH (a:AccountHolder) WHERE a.wcc=6 RETURN id(a) AS id',
+    'MATCH path=(ah1)-[:HAS_BANKACCOUNT]->(ba)-[:SEND]->(t:Transaction)-[:SEND]-(:BankAccount)<-[:HAS_BANKACCOUNT]-(ah2)
+WHERE ah1.wcc=6 AND ah2.wcc=6
+WITH ah1,ah2,count(*) AS sendFreq,sum(t.amount) AS sendTotal
+Return id(ah1) AS source,id(ah2) AS target,toFloat(sendTotal)/sendFreq AS weight',
+{graph:'cypher'}
+)
+
+################################################## Stream Label Propagation #######################################
+CALL algo.beta.labelPropagation.stream(null,null,{direction:'OUTGOING',graph:'moneyTransfers2',weightProperty:'weight'}) YIELD nodeId,community
+WITH community,collect(algo.asNode(nodeId).customerID) AS customers,avg(algo.asNode(nodeId).fraudScore) as avgFraudScore
+WITH *,size(customers) as communitySize
+RETURN community,communitySize,avgFraudScore,customers
+ORDER BY communitySize DESC
+
+##################################################  Store Label Propagation #######################################
+CALL algo.beta.labelPropagation(null,null,{direction:'OUTGOING',graph:'moneyTransfers2',weightProperty:'weight',write:true,writeProperty:'labelPropagation'})
+
+##################################################  Degree Centrality Stream  #######################################
+
+call algo.degree.stream(null,null,{graph:'moneyTransfers2',direction:'both'}) YIELD nodeId,score
+RETURN algo.asNode(nodeId).customerID AS customerId,score
+ORDER BY score DESC
+
+##################################################  Closeness Centrality Stream  #######################################
+
+call algo.closeness.stream(null,null,{graph:'moneyTransfers2',direction:'both'}) YIELD nodeId,centrality
+RETURN algo.asNode(nodeId).customerID AS customerId,centrality
+ORDER BY centrality DESC
+
+##################################################  Betweenness Centrality Stream  #######################################
+
+call algo.betweenness.stream(null,null,{graph:'moneyTransfers2'}) YIELD nodeId,centrality
+RETURN algo.asNode(nodeId).customerID AS customerId,centrality
+ORDER BY centrality DESC
+
+##################################################  Page Rank Stream  #######################################
+
+call algo.pageRank.stream(null,null,{graph:'moneyTransfers2'}) YIELD nodeId,score
+RETURN algo.asNode(nodeId).customerID AS customerId,score
+ORDER BY score DESC
